@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz 11 meses</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 30px;
+      font-size: 3em;
+      color: #f5d142;
+    }
+    p {
+      max-width: 600px;
+      margin: 20px auto;
+      font-size: 1.2em;
+      line-height: 1.6em;
+    }
+    #countdown {
+      font-size: 1.5em;
+      margin-bottom: 30px;
+      color: #00ffcc;
+    }
+    .slideshow {
+      position: relative;
+      max-width: 90vw;
+      max-height: 80vh;
+      margin: 0 auto 40px auto;
+      overflow: hidden;
+    }
+    .slideshow img {
+      width: 100%;
+      height: auto;
+      display: none;
+      border-radius: 10px;
+    }
+    .slideshow img.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Feliz 11 meses</h1>
+  <p>Já faz quase um ano que nós nos casamos, quase um ano daquele dia tão especial, eu não sei nem como agradecer por ter você na minha vida, sou muito feliz do seu lado, mesmo você sendo malcriadinha. Te amo muito, mês que vem tem viagem 😎🤎</p>
+  <div id="countdown"></div>
+
+  <div class="slideshow">
+    <!-- As imagens serão injetadas aqui via JS -->
+  </div>
+
+  <script>
+    const weddingDate = new Date("2024-06-07T00:00:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = now - weddingDate;
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const months = Math.floor(days / 30.44);
+
+      const remainingDays = days % 30.44;
+      const remainingHours = hours % 24;
+      const remainingMinutes = minutes % 60;
+
+      document.getElementById("countdown").textContent =
+        `${months} meses, ${Math.floor(remainingDays)} dias, ${remainingHours} horas e ${remainingMinutes} minutos juntos.`;
+    }
+
+    setInterval(updateCountdown, 60000);
+    updateCountdown();
+
+    const images = [
+      "Imagem do WhatsApp de 2025-05-07 à(s) 10.27.37_9bdc8e1a.jpg",
+      "Imagem do WhatsApp de 2025-05-07 à(s) 10.27.37_bf2e426e.jpg",
+      "Imagem do WhatsApp de 2025-05-07 à(s) 10.27.37_caabeb82.jpg",
+      "Imagem do WhatsApp de 2025-05-07 à(s) 10.27.37_d19cd889.jpg",
+      "Imagem do WhatsApp de 2025-05-07 à(s) 10.27.37_d38c5cec.jpg",
+      "Imagem do WhatsApp de 2025-05-07 à(s) 10.27.39_6049c8cd.jpg",
+      "Imagem do WhatsApp de 2025-05-07 à(s) 10.27.39_cde3dad6.jpg",
+      "Pré-Wedding - Bianca & Dennis-017.jpg"
+    ];
+
+    const slideshow = document.querySelector(".slideshow");
+    images.sort(() => Math.random() - 0.5); // Embaralha as imagens
+
+    images.forEach((src, i) => {
+      const img = document.createElement("img");
+      img.src = src;
+      if (i === 0) img.classList.add("active");
+      slideshow.appendChild(img);
+    });
+
+    let current = 0;
+    const allImages = document.querySelectorAll(".slideshow img");
+
+    setInterval(() => {
+      allImages[current].classList.remove("active");
+      current = (current + 1) % allImages.length;
+      allImages[current].classList.add("active");
+    }, 3000);
+  </script>
+</body>
+</html>
